@@ -134,6 +134,91 @@
       transition: width 0.6s ease;
     }
 
+    /* Marketing Section */
+    .section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #2d3748;
+      margin: 32px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .therapist-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1.5px solid #cbd5e0;
+      background: white;
+      font-size: 0.85rem;
+      cursor: pointer;
+      color: #4a5568;
+      transition: all 0.15s;
+    }
+
+    .tab-btn.active {
+      background: #2b6cb0;
+      border-color: #2b6cb0;
+      color: white;
+      font-weight: 600;
+    }
+
+    .ad-cost-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .ad-cost-card {
+      background: white;
+      border-radius: 10px;
+      padding: 14px 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .ad-cost-channel {
+      font-size: 0.75rem;
+      color: #718096;
+    }
+
+    .ad-cost-amount {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .ad-cost-cpa {
+      font-size: 0.72rem;
+      color: #a0aec0;
+    }
+
+    .marketing-table-wrap {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      overflow-x: auto;
+    }
+
+    .marketing-table-wrap h2 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #4a5568;
+      margin-bottom: 16px;
+    }
+
+    .badge-red    { background: #fed7d7; color: #9b2c2c; }
+    .badge-gray   { background: #edf2f7; color: #4a5568; }
+
     @media (max-width: 768px) {
       .charts-grid, .bottom-grid { grid-template-columns: 1fr; }
     }
@@ -231,6 +316,39 @@
     </div>
   </div>
 
+
+  <!-- Marketing Analysis Section -->
+  <div class="section-title">セラピスト別 マーケティング分析</div>
+
+  <!-- Therapist Filter -->
+  <div class="therapist-tabs">
+    <button class="tab-btn active" onclick="filterTherapist('all', this)">全員</button>
+    <button class="tab-btn" onclick="filterTherapist('山田', this)">山田 PT</button>
+    <button class="tab-btn" onclick="filterTherapist('佐々木', this)">佐々木 PT</button>
+    <button class="tab-btn" onclick="filterTherapist('林', this)">林 PT</button>
+  </div>
+
+  <!-- Ad Cost Cards -->
+  <div class="ad-cost-grid" id="adCostGrid"></div>
+
+  <!-- Patient Marketing Table -->
+  <div class="marketing-table-wrap">
+    <h2>患者別 流入・予約状況</h2>
+    <table id="marketingTable">
+      <thead>
+        <tr>
+          <th>患者名</th>
+          <th>担当セラピスト</th>
+          <th>来院日</th>
+          <th>流入媒体</th>
+          <th>キャンセル</th>
+          <th>次回予約</th>
+        </tr>
+      </thead>
+      <tbody id="marketingTbody"></tbody>
+    </table>
+  </div>
+
 </div>
 
 <script>
@@ -314,6 +432,83 @@
         </div>
       </div>`;
   });
+
+  // ---- Marketing Analysis ----
+
+  const adCosts = [
+    { channel: 'ホームページ',  cost: 30000,  color: '#4299e1' },
+    { channel: 'Meta広告',     cost: 85000,  color: '#667eea' },
+    { channel: 'チラシ',       cost: 45000,  color: '#f6ad55' },
+    { channel: 'Instagram',   cost: 60000,  color: '#fc8181' },
+    { channel: '紹介',         cost: 0,      color: '#68d391' },
+    { channel: 'その他',       cost: 10000,  color: '#a0aec0' },
+  ];
+
+  const patients = [
+    { name: '田中 様',  therapist: '山田',  date: '5/2',  channel: 'Meta広告',    cancel: false, nextAppt: true  },
+    { name: '鈴木 様',  therapist: '山田',  date: '5/3',  channel: 'ホームページ', cancel: false, nextAppt: true  },
+    { name: '佐藤 様',  therapist: '佐々木', date: '5/4',  channel: 'チラシ',      cancel: false, nextAppt: false },
+    { name: '山本 様',  therapist: '林',    date: '5/5',  channel: 'Instagram',  cancel: true,  nextAppt: false },
+    { name: '中村 様',  therapist: '山田',  date: '5/6',  channel: '紹介',        cancel: false, nextAppt: true  },
+    { name: '小林 様',  therapist: '佐々木', date: '5/7',  channel: 'Meta広告',    cancel: false, nextAppt: true  },
+    { name: '加藤 様',  therapist: '林',    date: '5/7',  channel: 'ホームページ', cancel: true,  nextAppt: false },
+    { name: '伊藤 様',  therapist: '山田',  date: '5/8',  channel: 'チラシ',      cancel: false, nextAppt: true  },
+    { name: '渡辺 様',  therapist: '佐々木', date: '5/8',  channel: 'Instagram',  cancel: false, nextAppt: false },
+    { name: '松本 様',  therapist: '林',    date: '5/9',  channel: '紹介',        cancel: false, nextAppt: true  },
+    { name: '井上 様',  therapist: '山田',  date: '5/9',  channel: 'Meta広告',    cancel: false, nextAppt: true  },
+    { name: '木村 様',  therapist: '佐々木', date: '5/10', channel: 'その他',      cancel: true,  nextAppt: false },
+    { name: '林 様',    therapist: '林',    date: '5/10', channel: 'ホームページ', cancel: false, nextAppt: true  },
+    { name: '清水 様',  therapist: '山田',  date: '5/10', channel: 'Instagram',  cancel: false, nextAppt: false },
+  ];
+
+  function renderAdCosts(data) {
+    const totalPatients = data.length;
+    const grid = document.getElementById('adCostGrid');
+    grid.innerHTML = '';
+    adCosts.forEach(a => {
+      const count = data.filter(p => p.channel === a.channel).length;
+      const cpa = count > 0 && a.cost > 0 ? Math.round(a.cost / count).toLocaleString() : '—';
+      grid.innerHTML += `
+        <div class="ad-cost-card">
+          <div class="ad-cost-channel">${a.channel}</div>
+          <div class="ad-cost-amount" style="color:${a.color}">
+            ${a.cost > 0 ? '¥' + a.cost.toLocaleString() : '無料'}
+          </div>
+          <div class="ad-cost-cpa">来院数 ${count}人　CPA: ¥${cpa}</div>
+        </div>`;
+    });
+  }
+
+  function renderTable(data) {
+    const tbody = document.getElementById('marketingTbody');
+    tbody.innerHTML = '';
+    data.forEach(p => {
+      tbody.innerHTML += `
+        <tr>
+          <td>${p.name}</td>
+          <td>${p.therapist} PT</td>
+          <td>${p.date}</td>
+          <td><span class="badge badge-blue">${p.channel}</span></td>
+          <td>${p.cancel
+            ? '<span class="badge badge-red">あり</span>'
+            : '<span class="badge badge-gray">なし</span>'}</td>
+          <td>${p.nextAppt
+            ? '<span class="badge badge-green">取得</span>'
+            : '<span class="badge badge-orange">未取得</span>'}</td>
+        </tr>`;
+    });
+  }
+
+  function filterTherapist(name, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filtered = name === 'all' ? patients : patients.filter(p => p.therapist === name);
+    renderAdCosts(filtered);
+    renderTable(filtered);
+  }
+
+  renderAdCosts(patients);
+  renderTable(patients);
 </script>
 </body>
 </html>
