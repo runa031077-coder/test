@@ -1,1 +1,319 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>整骨院マーケティングダッシュボード</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    body {
+      font-family: 'Segoe UI', 'Hiragino Sans', sans-serif;
+      background: #f0f4f8;
+      color: #2d3748;
+    }
+
+    header {
+      background: linear-gradient(135deg, #2b6cb0, #2c7a7b);
+      color: white;
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    header h1 { font-size: 1.4rem; font-weight: 700; }
+    header span { font-size: 0.85rem; opacity: 0.85; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 28px 24px;
+    }
+
+    /* KPI Cards */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .kpi-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      border-left: 4px solid #2b6cb0;
+    }
+
+    .kpi-card.green  { border-left-color: #38a169; }
+    .kpi-card.orange { border-left-color: #dd6b20; }
+    .kpi-card.purple { border-left-color: #6b46c1; }
+
+    .kpi-label { font-size: 0.78rem; color: #718096; margin-bottom: 6px; }
+    .kpi-value { font-size: 2rem; font-weight: 700; }
+    .kpi-sub   { font-size: 0.78rem; margin-top: 4px; }
+    .up   { color: #38a169; }
+    .down { color: #e53e3e; }
+
+    /* Charts Row */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .chart-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    .chart-card h2 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #4a5568;
+      margin-bottom: 16px;
+    }
+
+    .chart-wrap { position: relative; height: 220px; }
+
+    /* Bottom Row */
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* Table */
+    table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+    thead th {
+      text-align: left;
+      padding: 8px 10px;
+      background: #edf2f7;
+      color: #4a5568;
+      font-weight: 600;
+    }
+    tbody td { padding: 10px; border-bottom: 1px solid #f0f4f8; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: #f7fafc; }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .badge-green  { background: #c6f6d5; color: #276749; }
+    .badge-blue   { background: #bee3f8; color: #2b6cb0; }
+    .badge-orange { background: #feebc8; color: #c05621; }
+
+    /* Bar chart list */
+    .channel-list { display: flex; flex-direction: column; gap: 12px; }
+    .channel-item { }
+    .channel-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+    }
+    .bar-track {
+      background: #edf2f7;
+      border-radius: 4px;
+      height: 8px;
+    }
+    .bar-fill {
+      height: 8px;
+      border-radius: 4px;
+      transition: width 0.6s ease;
+    }
+
+    @media (max-width: 768px) {
+      .charts-grid, .bottom-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🏥 整骨院マーケティングダッシュボード</h1>
+  <span>集計期間：2026年4月</span>
+</header>
+
+<div class="container">
+
+  <!-- KPI Cards -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">新規患者数（今月）</div>
+      <div class="kpi-value">48<span style="font-size:1rem;font-weight:400">人</span></div>
+      <div class="kpi-sub up">▲ 12% 前月比</div>
+    </div>
+    <div class="kpi-card green">
+      <div class="kpi-label">リピート患者数（今月）</div>
+      <div class="kpi-value">132<span style="font-size:1rem;font-weight:400">人</span></div>
+      <div class="kpi-sub up">▲ 5% 前月比</div>
+    </div>
+    <div class="kpi-card orange">
+      <div class="kpi-label">月間売上</div>
+      <div class="kpi-value">¥<span>1.24M</span></div>
+      <div class="kpi-sub up">▲ 8% 前月比</div>
+    </div>
+    <div class="kpi-card purple">
+      <div class="kpi-label">予約充填率</div>
+      <div class="kpi-value">87<span style="font-size:1rem;font-weight:400">%</span></div>
+      <div class="kpi-sub down">▼ 2% 前月比</div>
+    </div>
+  </div>
+
+  <!-- Charts -->
+  <div class="charts-grid">
+    <div class="chart-card">
+      <h2>月別 新規・リピート患者数推移</h2>
+      <div class="chart-wrap">
+        <canvas id="patientChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-card">
+      <h2>流入経路別 割合</h2>
+      <div class="chart-wrap">
+        <canvas id="sourceChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="bottom-grid">
+    <div class="chart-card">
+      <h2>施術メニュー別 売上構成</h2>
+      <div class="channel-list" id="menuList"></div>
+    </div>
+    <div class="chart-card">
+      <h2>最近の予約状況</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>患者名</th>
+            <th>施術</th>
+            <th>日時</th>
+            <th>状態</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>田中 様</td><td>骨盤矯正</td><td>5/10 10:00</td>
+            <td><span class="badge badge-green">確定</span></td>
+          </tr>
+          <tr>
+            <td>鈴木 様</td><td>肩こり施術</td><td>5/10 11:00</td>
+            <td><span class="badge badge-green">確定</span></td>
+          </tr>
+          <tr>
+            <td>佐藤 様</td><td>腰痛ケア</td><td>5/10 13:30</td>
+            <td><span class="badge badge-blue">来院済</span></td>
+          </tr>
+          <tr>
+            <td>山本 様</td><td>スポーツ外傷</td><td>5/10 15:00</td>
+            <td><span class="badge badge-orange">未確定</span></td>
+          </tr>
+          <tr>
+            <td>中村 様</td><td>電気療法</td><td>5/11 09:00</td>
+            <td><span class="badge badge-green">確定</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Patient trend chart
+  const patientCtx = document.getElementById('patientChart').getContext('2d');
+  new Chart(patientCtx, {
+    type: 'bar',
+    data: {
+      labels: ['11月', '12月', '1月', '2月', '3月', '4月'],
+      datasets: [
+        {
+          label: '新規患者',
+          data: [32, 28, 35, 40, 43, 48],
+          backgroundColor: '#4299e1',
+          borderRadius: 4,
+        },
+        {
+          label: 'リピート患者',
+          data: [110, 105, 118, 122, 126, 132],
+          backgroundColor: '#68d391',
+          borderRadius: 4,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11 } } } },
+      scales: {
+        x: { grid: { display: false } },
+        y: { beginAtZero: true, grid: { color: '#edf2f7' } }
+      }
+    }
+  });
+
+  // Source donut chart
+  const sourceCtx = document.getElementById('sourceChart').getContext('2d');
+  new Chart(sourceCtx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Web検索', 'SNS', '紹介', 'チラシ', 'その他'],
+      datasets: [{
+        data: [38, 22, 25, 10, 5],
+        backgroundColor: ['#4299e1', '#f6ad55', '#68d391', '#fc8181', '#b794f4'],
+        borderWidth: 2,
+        borderColor: '#fff'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: { font: { size: 11 }, padding: 10 }
+        }
+      },
+      cutout: '65%'
+    }
+  });
+
+  // Menu revenue bars
+  const menus = [
+    { name: '骨盤矯正',   value: 35, color: '#4299e1' },
+    { name: '腰痛ケア',   value: 25, color: '#68d391' },
+    { name: '肩こり施術', value: 20, color: '#f6ad55' },
+    { name: 'スポーツ外傷', value: 12, color: '#fc8181' },
+    { name: '電気療法',   value: 8,  color: '#b794f4' },
+  ];
+
+  const list = document.getElementById('menuList');
+  menus.forEach(m => {
+    list.innerHTML += `
+      <div class="channel-item">
+        <div class="channel-top">
+          <span>${m.name}</span>
+          <span style="font-weight:600">${m.value}%</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:${m.value}%;background:${m.color}"></div>
+        </div>
+      </div>`;
+  });
+</script>
+</body>
+</html>
