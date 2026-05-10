@@ -28,9 +28,114 @@
     header span { font-size: 0.85rem; opacity: 0.85; }
 
     .container {
-      max-width: 1200px;
+      max-width: 1280px;
       margin: 0 auto;
       padding: 28px 24px;
+    }
+
+    .section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #2d3748;
+      margin: 0 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    /* Tab Buttons */
+    .tab-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1.5px solid #cbd5e0;
+      background: white;
+      font-size: 0.85rem;
+      cursor: pointer;
+      color: #4a5568;
+      transition: all 0.15s;
+    }
+
+    .tab-btn.active {
+      background: #2b6cb0;
+      border-color: #2b6cb0;
+      color: white;
+      font-weight: 600;
+    }
+
+    /* Store KPI Summary */
+    .store-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .store-kpi-card {
+      background: white;
+      border-radius: 10px;
+      padding: 14px 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+      border-left: 3px solid #2b6cb0;
+    }
+
+    .store-kpi-card.total { border-left-color: #6b46c1; background: #faf5ff; }
+
+    .skpi-label { font-size: 0.72rem; color: #718096; margin-bottom: 4px; }
+    .skpi-value { font-size: 1.3rem; font-weight: 700; }
+    .skpi-sub   { font-size: 0.72rem; margin-top: 3px; }
+    .up   { color: #38a169; }
+    .down { color: #e53e3e; }
+
+    /* Ad Cost Cards */
+    .ad-cost-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .ad-cost-card {
+      background: white;
+      border-radius: 10px;
+      padding: 14px 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .ad-cost-channel { font-size: 0.75rem; color: #718096; }
+    .ad-cost-amount  { font-size: 1.15rem; font-weight: 700; }
+    .ad-cost-cpa     { font-size: 0.72rem; color: #a0aec0; }
+
+    /* Marketing Table */
+    .marketing-table-wrap {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      overflow-x: auto;
+      margin-bottom: 32px;
+    }
+
+    .marketing-table-wrap h2 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #4a5568;
+      margin-bottom: 16px;
+    }
+
+    .therapist-filter-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
     }
 
     /* KPI Cards */
@@ -56,8 +161,6 @@
     .kpi-label { font-size: 0.78rem; color: #718096; margin-bottom: 6px; }
     .kpi-value { font-size: 2rem; font-weight: 700; }
     .kpi-sub   { font-size: 0.78rem; margin-top: 4px; }
-    .up   { color: #38a169; }
-    .down { color: #e53e3e; }
 
     /* Charts Row */
     .charts-grid {
@@ -113,111 +216,22 @@
     .badge-green  { background: #c6f6d5; color: #276749; }
     .badge-blue   { background: #bee3f8; color: #2b6cb0; }
     .badge-orange { background: #feebc8; color: #c05621; }
+    .badge-red    { background: #fed7d7; color: #9b2c2c; }
+    .badge-gray   { background: #edf2f7; color: #4a5568; }
+    .badge-purple { background: #e9d8fd; color: #553c9a; }
 
     /* Bar chart list */
     .channel-list { display: flex; flex-direction: column; gap: 12px; }
-    .channel-item { }
     .channel-top {
       display: flex;
       justify-content: space-between;
       font-size: 0.85rem;
       margin-bottom: 4px;
     }
-    .bar-track {
-      background: #edf2f7;
-      border-radius: 4px;
-      height: 8px;
-    }
-    .bar-fill {
-      height: 8px;
-      border-radius: 4px;
-      transition: width 0.6s ease;
-    }
+    .bar-track { background: #edf2f7; border-radius: 4px; height: 8px; }
+    .bar-fill  { height: 8px; border-radius: 4px; transition: width 0.6s ease; }
 
-    /* Marketing Section */
-    .section-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #2d3748;
-      margin: 32px 0 16px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid #e2e8f0;
-    }
-
-    .therapist-tabs {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-    }
-
-    .tab-btn {
-      padding: 6px 16px;
-      border-radius: 20px;
-      border: 1.5px solid #cbd5e0;
-      background: white;
-      font-size: 0.85rem;
-      cursor: pointer;
-      color: #4a5568;
-      transition: all 0.15s;
-    }
-
-    .tab-btn.active {
-      background: #2b6cb0;
-      border-color: #2b6cb0;
-      color: white;
-      font-weight: 600;
-    }
-
-    .ad-cost-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .ad-cost-card {
-      background: white;
-      border-radius: 10px;
-      padding: 14px 16px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .ad-cost-channel {
-      font-size: 0.75rem;
-      color: #718096;
-    }
-
-    .ad-cost-amount {
-      font-size: 1.2rem;
-      font-weight: 700;
-    }
-
-    .ad-cost-cpa {
-      font-size: 0.72rem;
-      color: #a0aec0;
-    }
-
-    .marketing-table-wrap {
-      background: white;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-      overflow-x: auto;
-    }
-
-    .marketing-table-wrap h2 {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: #4a5568;
-      margin-bottom: 16px;
-    }
-
-    .badge-red    { background: #fed7d7; color: #9b2c2c; }
-    .badge-gray   { background: #edf2f7; color: #4a5568; }
+    hr.divider { border: none; border-top: 2px solid #e2e8f0; margin: 32px 0; }
 
     @media (max-width: 768px) {
       .charts-grid, .bottom-grid { grid-template-columns: 1fr; }
@@ -233,25 +247,68 @@
 
 <div class="container">
 
-  <!-- KPI Cards -->
+  <!-- ① セラピスト別マーケティング分析（最上部） -->
+  <div class="section-title">店舗別 マーケティング分析</div>
+
+  <!-- Store Tabs -->
+  <div class="tab-row" id="storeTabs">
+    <button class="tab-btn active" onclick="filterStore('all', this)">全店舗（合計）</button>
+    <button class="tab-btn" onclick="filterStore('渋谷本院', this)">渋谷本院</button>
+    <button class="tab-btn" onclick="filterStore('新宿店', this)">新宿店</button>
+    <button class="tab-btn" onclick="filterStore('池袋店', this)">池袋店</button>
+    <button class="tab-btn" onclick="filterStore('品川店', this)">品川店</button>
+    <button class="tab-btn" onclick="filterStore('横浜店', this)">横浜店</button>
+  </div>
+
+  <!-- Store KPI Summary -->
+  <div class="store-kpi-grid" id="storeKpiGrid"></div>
+
+  <!-- Ad Cost Cards -->
+  <div class="ad-cost-grid" id="adCostGrid"></div>
+
+  <!-- Therapist sub-filter -->
+  <div class="marketing-table-wrap">
+    <h2>患者別 流入・予約状況</h2>
+    <div class="therapist-filter-row" id="therapistTabs"></div>
+    <table id="marketingTable">
+      <thead>
+        <tr>
+          <th>患者名</th>
+          <th>店舗</th>
+          <th>担当セラピスト</th>
+          <th>来院日</th>
+          <th>流入媒体</th>
+          <th>キャンセル</th>
+          <th>次回予約</th>
+        </tr>
+      </thead>
+      <tbody id="marketingTbody"></tbody>
+    </table>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ② 全体KPI -->
+  <div class="section-title" style="margin-top:0">全体 KPI サマリー</div>
+
   <div class="kpi-grid">
     <div class="kpi-card">
-      <div class="kpi-label">新規患者数（今月）</div>
+      <div class="kpi-label">新規患者数（今月・全店舗）</div>
       <div class="kpi-value">48<span style="font-size:1rem;font-weight:400">人</span></div>
       <div class="kpi-sub up">▲ 12% 前月比</div>
     </div>
     <div class="kpi-card green">
-      <div class="kpi-label">リピート患者数（今月）</div>
+      <div class="kpi-label">リピート患者数（今月・全店舗）</div>
       <div class="kpi-value">132<span style="font-size:1rem;font-weight:400">人</span></div>
       <div class="kpi-sub up">▲ 5% 前月比</div>
     </div>
     <div class="kpi-card orange">
-      <div class="kpi-label">月間売上</div>
-      <div class="kpi-value">¥<span>1.24M</span></div>
+      <div class="kpi-label">月間売上（全店舗）</div>
+      <div class="kpi-value">124<span style="font-size:1rem;font-weight:400">万円</span></div>
       <div class="kpi-sub up">▲ 8% 前月比</div>
     </div>
     <div class="kpi-card purple">
-      <div class="kpi-label">予約充填率</div>
+      <div class="kpi-label">予約充填率（全店舗平均）</div>
       <div class="kpi-value">87<span style="font-size:1rem;font-weight:400">%</span></div>
       <div class="kpi-sub down">▼ 2% 前月比</div>
     </div>
@@ -260,7 +317,7 @@
   <!-- Charts -->
   <div class="charts-grid">
     <div class="chart-card">
-      <h2>月別 新規・リピート患者数推移</h2>
+      <h2>月別 新規・リピート患者数推移（全店舗）</h2>
       <div class="chart-wrap">
         <canvas id="patientChart"></canvas>
       </div>
@@ -283,232 +340,252 @@
       <h2>最近の予約状況</h2>
       <table>
         <thead>
-          <tr>
-            <th>患者名</th>
-            <th>施術</th>
-            <th>日時</th>
-            <th>状態</th>
-          </tr>
+          <tr><th>患者名</th><th>施術</th><th>日時</th><th>状態</th></tr>
         </thead>
         <tbody>
-          <tr>
-            <td>田中 様</td><td>骨盤矯正</td><td>5/10 10:00</td>
-            <td><span class="badge badge-green">確定</span></td>
-          </tr>
-          <tr>
-            <td>鈴木 様</td><td>肩こり施術</td><td>5/10 11:00</td>
-            <td><span class="badge badge-green">確定</span></td>
-          </tr>
-          <tr>
-            <td>佐藤 様</td><td>腰痛ケア</td><td>5/10 13:30</td>
-            <td><span class="badge badge-blue">来院済</span></td>
-          </tr>
-          <tr>
-            <td>山本 様</td><td>スポーツ外傷</td><td>5/10 15:00</td>
-            <td><span class="badge badge-orange">未確定</span></td>
-          </tr>
-          <tr>
-            <td>中村 様</td><td>電気療法</td><td>5/11 09:00</td>
-            <td><span class="badge badge-green">確定</span></td>
-          </tr>
+          <tr><td>田中 様</td><td>骨盤矯正</td><td>5/10 10:00</td><td><span class="badge badge-green">確定</span></td></tr>
+          <tr><td>鈴木 様</td><td>肩こり施術</td><td>5/10 11:00</td><td><span class="badge badge-green">確定</span></td></tr>
+          <tr><td>佐藤 様</td><td>腰痛ケア</td><td>5/10 13:30</td><td><span class="badge badge-blue">来院済</span></td></tr>
+          <tr><td>山本 様</td><td>スポーツ外傷</td><td>5/10 15:00</td><td><span class="badge badge-orange">未確定</span></td></tr>
+          <tr><td>中村 様</td><td>電気療法</td><td>5/11 09:00</td><td><span class="badge badge-green">確定</span></td></tr>
         </tbody>
       </table>
     </div>
   </div>
 
-
-  <!-- Marketing Analysis Section -->
-  <div class="section-title">セラピスト別 マーケティング分析</div>
-
-  <!-- Therapist Filter -->
-  <div class="therapist-tabs">
-    <button class="tab-btn active" onclick="filterTherapist('all', this)">全員</button>
-    <button class="tab-btn" onclick="filterTherapist('山田', this)">山田 PT</button>
-    <button class="tab-btn" onclick="filterTherapist('佐々木', this)">佐々木 PT</button>
-    <button class="tab-btn" onclick="filterTherapist('林', this)">林 PT</button>
-  </div>
-
-  <!-- Ad Cost Cards -->
-  <div class="ad-cost-grid" id="adCostGrid"></div>
-
-  <!-- Patient Marketing Table -->
-  <div class="marketing-table-wrap">
-    <h2>患者別 流入・予約状況</h2>
-    <table id="marketingTable">
-      <thead>
-        <tr>
-          <th>患者名</th>
-          <th>担当セラピスト</th>
-          <th>来院日</th>
-          <th>流入媒体</th>
-          <th>キャンセル</th>
-          <th>次回予約</th>
-        </tr>
-      </thead>
-      <tbody id="marketingTbody"></tbody>
-    </table>
-  </div>
-
 </div>
 
 <script>
-  // Patient trend chart
+  // ---- 既存グラフ ----
   const patientCtx = document.getElementById('patientChart').getContext('2d');
   new Chart(patientCtx, {
     type: 'bar',
     data: {
       labels: ['11月', '12月', '1月', '2月', '3月', '4月'],
       datasets: [
-        {
-          label: '新規患者',
-          data: [32, 28, 35, 40, 43, 48],
-          backgroundColor: '#4299e1',
-          borderRadius: 4,
-        },
-        {
-          label: 'リピート患者',
-          data: [110, 105, 118, 122, 126, 132],
-          backgroundColor: '#68d391',
-          borderRadius: 4,
-        }
+        { label: '新規患者', data: [32, 28, 35, 40, 43, 48], backgroundColor: '#4299e1', borderRadius: 4 },
+        { label: 'リピート患者', data: [110, 105, 118, 122, 126, 132], backgroundColor: '#68d391', borderRadius: 4 }
       ]
     },
     options: {
-      responsive: true,
-      maintainAspectRatio: false,
+      responsive: true, maintainAspectRatio: false,
       plugins: { legend: { position: 'bottom', labels: { font: { size: 11 } } } },
-      scales: {
-        x: { grid: { display: false } },
-        y: { beginAtZero: true, grid: { color: '#edf2f7' } }
-      }
+      scales: { x: { grid: { display: false } }, y: { beginAtZero: true, grid: { color: '#edf2f7' } } }
     }
   });
 
-  // Source donut chart
   const sourceCtx = document.getElementById('sourceChart').getContext('2d');
   new Chart(sourceCtx, {
     type: 'doughnut',
     data: {
       labels: ['Web検索', 'SNS', '紹介', 'チラシ', 'その他'],
-      datasets: [{
-        data: [38, 22, 25, 10, 5],
-        backgroundColor: ['#4299e1', '#f6ad55', '#68d391', '#fc8181', '#b794f4'],
-        borderWidth: 2,
-        borderColor: '#fff'
-      }]
+      datasets: [{ data: [38, 22, 25, 10, 5], backgroundColor: ['#4299e1', '#f6ad55', '#68d391', '#fc8181', '#b794f4'], borderWidth: 2, borderColor: '#fff' }]
     },
     options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: { font: { size: 11 }, padding: 10 }
-        }
-      },
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 10 } } },
       cutout: '65%'
     }
   });
 
-  // Menu revenue bars
   const menus = [
-    { name: '骨盤矯正',   value: 35, color: '#4299e1' },
-    { name: '腰痛ケア',   value: 25, color: '#68d391' },
-    { name: '肩こり施術', value: 20, color: '#f6ad55' },
+    { name: '骨盤矯正',     value: 35, color: '#4299e1' },
+    { name: '腰痛ケア',     value: 25, color: '#68d391' },
+    { name: '肩こり施術',   value: 20, color: '#f6ad55' },
     { name: 'スポーツ外傷', value: 12, color: '#fc8181' },
-    { name: '電気療法',   value: 8,  color: '#b794f4' },
+    { name: '電気療法',     value: 8,  color: '#b794f4' },
   ];
-
   const list = document.getElementById('menuList');
   menus.forEach(m => {
     list.innerHTML += `
-      <div class="channel-item">
-        <div class="channel-top">
-          <span>${m.name}</span>
-          <span style="font-weight:600">${m.value}%</span>
-        </div>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:${m.value}%;background:${m.color}"></div>
-        </div>
+      <div>
+        <div class="channel-top"><span>${m.name}</span><span style="font-weight:600">${m.value}%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:${m.value}%;background:${m.color}"></div></div>
       </div>`;
   });
 
-  // ---- Marketing Analysis ----
+  // ---- マーケティング分析データ ----
 
-  const adCosts = [
-    { channel: 'ホームページ',  cost: 30000,  color: '#4299e1' },
-    { channel: 'Meta広告',     cost: 85000,  color: '#667eea' },
-    { channel: 'チラシ',       cost: 45000,  color: '#f6ad55' },
-    { channel: 'Instagram',   cost: 60000,  color: '#fc8181' },
-    { channel: '紹介',         cost: 0,      color: '#68d391' },
-    { channel: 'その他',       cost: 10000,  color: '#a0aec0' },
+  const adChannels = [
+    { channel: 'ホームページ', color: '#4299e1' },
+    { channel: 'Meta広告',    color: '#667eea' },
+    { channel: 'チラシ',      color: '#f6ad55' },
+    { channel: 'Instagram',  color: '#fc8181' },
+    { channel: '紹介',        color: '#68d391' },
+    { channel: 'その他',      color: '#a0aec0' },
   ];
 
+  // 店舗ごとの月間広告費
+  const adCostByStore = {
+    '渋谷本院': { 'ホームページ': 10000, 'Meta広告': 25000, 'チラシ': 12000, 'Instagram': 18000, '紹介': 0, 'その他': 3000 },
+    '新宿店':   { 'ホームページ': 8000,  'Meta広告': 20000, 'チラシ': 10000, 'Instagram': 14000, '紹介': 0, 'その他': 2000 },
+    '池袋店':   { 'ホームページ': 6000,  'Meta広告': 15000, 'チラシ': 9000,  'Instagram': 12000, '紹介': 0, 'その他': 2000 },
+    '品川店':   { 'ホームページ': 4000,  'Meta広告': 15000, 'チラシ': 8000,  'Instagram': 10000, '紹介': 0, 'その他': 2000 },
+    '横浜店':   { 'ホームページ': 2000,  'Meta広告': 10000, 'チラシ': 6000,  'Instagram': 6000,  '紹介': 0, 'その他': 1000 },
+  };
+
+  // 店舗ごとのKPI
+  const storeKpi = {
+    '渋谷本院': { newPt: 14, repeat: 42, revenue: 38, fillRate: 91 },
+    '新宿店':   { newPt: 11, repeat: 33, revenue: 28, fillRate: 88 },
+    '池袋店':   { newPt: 9,  repeat: 25, revenue: 22, fillRate: 85 },
+    '品川店':   { newPt: 8,  repeat: 20, revenue: 20, fillRate: 84 },
+    '横浜店':   { newPt: 6,  repeat: 12, revenue: 16, fillRate: 82 },
+  };
+
+  // 患者データ
   const patients = [
-    { name: '田中 様',  therapist: '山田',  date: '5/2',  channel: 'Meta広告',    cancel: false, nextAppt: true  },
-    { name: '鈴木 様',  therapist: '山田',  date: '5/3',  channel: 'ホームページ', cancel: false, nextAppt: true  },
-    { name: '佐藤 様',  therapist: '佐々木', date: '5/4',  channel: 'チラシ',      cancel: false, nextAppt: false },
-    { name: '山本 様',  therapist: '林',    date: '5/5',  channel: 'Instagram',  cancel: true,  nextAppt: false },
-    { name: '中村 様',  therapist: '山田',  date: '5/6',  channel: '紹介',        cancel: false, nextAppt: true  },
-    { name: '小林 様',  therapist: '佐々木', date: '5/7',  channel: 'Meta広告',    cancel: false, nextAppt: true  },
-    { name: '加藤 様',  therapist: '林',    date: '5/7',  channel: 'ホームページ', cancel: true,  nextAppt: false },
-    { name: '伊藤 様',  therapist: '山田',  date: '5/8',  channel: 'チラシ',      cancel: false, nextAppt: true  },
-    { name: '渡辺 様',  therapist: '佐々木', date: '5/8',  channel: 'Instagram',  cancel: false, nextAppt: false },
-    { name: '松本 様',  therapist: '林',    date: '5/9',  channel: '紹介',        cancel: false, nextAppt: true  },
-    { name: '井上 様',  therapist: '山田',  date: '5/9',  channel: 'Meta広告',    cancel: false, nextAppt: true  },
-    { name: '木村 様',  therapist: '佐々木', date: '5/10', channel: 'その他',      cancel: true,  nextAppt: false },
-    { name: '林 様',    therapist: '林',    date: '5/10', channel: 'ホームページ', cancel: false, nextAppt: true  },
-    { name: '清水 様',  therapist: '山田',  date: '5/10', channel: 'Instagram',  cancel: false, nextAppt: false },
+    { name: '田中 様',  store: '渋谷本院', therapist: '山田',  date: '5/2',  channel: 'Meta広告',    cancel: false, nextAppt: true  },
+    { name: '鈴木 様',  store: '渋谷本院', therapist: '山田',  date: '5/3',  channel: 'ホームページ', cancel: false, nextAppt: true  },
+    { name: '佐藤 様',  store: '新宿店',   therapist: '佐々木', date: '5/4',  channel: 'チラシ',      cancel: false, nextAppt: false },
+    { name: '山本 様',  store: '池袋店',   therapist: '林',    date: '5/5',  channel: 'Instagram',  cancel: true,  nextAppt: false },
+    { name: '中村 様',  store: '渋谷本院', therapist: '山田',  date: '5/6',  channel: '紹介',        cancel: false, nextAppt: true  },
+    { name: '小林 様',  store: '新宿店',   therapist: '佐々木', date: '5/7',  channel: 'Meta広告',    cancel: false, nextAppt: true  },
+    { name: '加藤 様',  store: '品川店',   therapist: '中島',  date: '5/7',  channel: 'ホームページ', cancel: true,  nextAppt: false },
+    { name: '伊藤 様',  store: '渋谷本院', therapist: '山田',  date: '5/8',  channel: 'チラシ',      cancel: false, nextAppt: true  },
+    { name: '渡辺 様',  store: '池袋店',   therapist: '林',    date: '5/8',  channel: 'Instagram',  cancel: false, nextAppt: false },
+    { name: '松本 様',  store: '横浜店',   therapist: '石田',  date: '5/9',  channel: '紹介',        cancel: false, nextAppt: true  },
+    { name: '井上 様',  store: '新宿店',   therapist: '佐々木', date: '5/9',  channel: 'Meta広告',    cancel: false, nextAppt: true  },
+    { name: '木村 様',  store: '品川店',   therapist: '中島',  date: '5/10', channel: 'その他',      cancel: true,  nextAppt: false },
+    { name: '林 様',    store: '横浜店',   therapist: '石田',  date: '5/10', channel: 'ホームページ', cancel: false, nextAppt: true  },
+    { name: '清水 様',  store: '渋谷本院', therapist: '山田',  date: '5/10', channel: 'Instagram',  cancel: false, nextAppt: false },
+    { name: '山田 様',  store: '新宿店',   therapist: '佐々木', date: '5/11', channel: 'チラシ',      cancel: false, nextAppt: true  },
+    { name: '高橋 様',  store: '池袋店',   therapist: '林',    date: '5/11', channel: 'Meta広告',    cancel: false, nextAppt: true  },
+    { name: '中野 様',  store: '品川店',   therapist: '中島',  date: '5/12', channel: 'Instagram',  cancel: false, nextAppt: true  },
+    { name: '岡田 様',  store: '横浜店',   therapist: '石田',  date: '5/12', channel: 'Meta広告',    cancel: true,  nextAppt: false },
   ];
 
-  function renderAdCosts(data) {
-    const totalPatients = data.length;
+  let currentStore = 'all';
+  let currentTherapist = 'all';
+
+  function getTherapists(storePts) {
+    const names = [...new Set(storePts.map(p => p.therapist))];
+    return names;
+  }
+
+  function renderStoreKpi(store) {
+    const grid = document.getElementById('storeKpiGrid');
+    grid.innerHTML = '';
+
+    if (store === 'all') {
+      // 各店舗 + 合計
+      const stores = Object.keys(storeKpi);
+      const total = stores.reduce((acc, s) => ({
+        newPt: acc.newPt + storeKpi[s].newPt,
+        repeat: acc.repeat + storeKpi[s].repeat,
+        revenue: acc.revenue + storeKpi[s].revenue,
+        fillRate: acc.fillRate + storeKpi[s].fillRate,
+      }), { newPt: 0, repeat: 0, revenue: 0, fillRate: 0 });
+      total.fillRate = Math.round(total.fillRate / stores.length);
+
+      stores.forEach(s => {
+        const d = storeKpi[s];
+        grid.innerHTML += `
+          <div class="store-kpi-card">
+            <div class="skpi-label">${s}</div>
+            <div class="skpi-value" style="font-size:1rem">${d.newPt}人 / ${d.repeat}人</div>
+            <div class="skpi-sub" style="color:#718096">新規 / リピート</div>
+            <div class="skpi-sub" style="margin-top:4px;font-weight:600">${d.revenue}万円　充填率 ${d.fillRate}%</div>
+          </div>`;
+      });
+      grid.innerHTML += `
+        <div class="store-kpi-card total">
+          <div class="skpi-label" style="color:#6b46c1;font-weight:700">全店舗 合計</div>
+          <div class="skpi-value" style="font-size:1rem;color:#6b46c1">${total.newPt}人 / ${total.repeat}人</div>
+          <div class="skpi-sub" style="color:#718096">新規 / リピート</div>
+          <div class="skpi-sub" style="margin-top:4px;font-weight:600;color:#6b46c1">${total.revenue}万円　充填率 ${total.fillRate}%</div>
+        </div>`;
+    } else {
+      const d = storeKpi[store];
+      ['新規患者数', 'リピート患者数', '月間売上', '予約充填率'].forEach((label, i) => {
+        const vals = [d.newPt + '人', d.repeat + '人', d.revenue + '万円', d.fillRate + '%'];
+        grid.innerHTML += `
+          <div class="store-kpi-card">
+            <div class="skpi-label">${label}</div>
+            <div class="skpi-value">${vals[i]}</div>
+          </div>`;
+      });
+    }
+  }
+
+  function renderAdCosts(storePts, store) {
     const grid = document.getElementById('adCostGrid');
     grid.innerHTML = '';
-    adCosts.forEach(a => {
-      const count = data.filter(p => p.channel === a.channel).length;
-      const cpa = count > 0 && a.cost > 0 ? Math.round(a.cost / count).toLocaleString() : '—';
+
+    adChannels.forEach(a => {
+      let cost = 0;
+      if (store === 'all') {
+        Object.values(adCostByStore).forEach(s => { cost += s[a.channel] || 0; });
+      } else {
+        cost = adCostByStore[store]?.[a.channel] || 0;
+      }
+      const count = storePts.filter(p => p.channel === a.channel).length;
+      const cpa = count > 0 && cost > 0 ? Math.round(cost / count).toLocaleString() : '—';
       grid.innerHTML += `
         <div class="ad-cost-card">
           <div class="ad-cost-channel">${a.channel}</div>
-          <div class="ad-cost-amount" style="color:${a.color}">
-            ${a.cost > 0 ? '¥' + a.cost.toLocaleString() : '無料'}
-          </div>
+          <div class="ad-cost-amount" style="color:${a.color}">${cost > 0 ? '¥' + cost.toLocaleString() : '無料'}</div>
           <div class="ad-cost-cpa">来院数 ${count}人　CPA: ¥${cpa}</div>
         </div>`;
     });
   }
 
+  function renderTherapistTabs(storePts) {
+    const container = document.getElementById('therapistTabs');
+    const names = getTherapists(storePts);
+    container.innerHTML = `<button class="tab-btn active" onclick="filterTherapist('all', this)">全員</button>`;
+    names.forEach(n => {
+      container.innerHTML += `<button class="tab-btn" onclick="filterTherapist('${n}', this)">${n} PT</button>`;
+    });
+    currentTherapist = 'all';
+  }
+
   function renderTable(data) {
     const tbody = document.getElementById('marketingTbody');
     tbody.innerHTML = '';
+    if (data.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#a0aec0;padding:20px">データなし</td></tr>';
+      return;
+    }
     data.forEach(p => {
       tbody.innerHTML += `
         <tr>
           <td>${p.name}</td>
+          <td><span class="badge badge-purple">${p.store}</span></td>
           <td>${p.therapist} PT</td>
           <td>${p.date}</td>
           <td><span class="badge badge-blue">${p.channel}</span></td>
-          <td>${p.cancel
-            ? '<span class="badge badge-red">あり</span>'
-            : '<span class="badge badge-gray">なし</span>'}</td>
-          <td>${p.nextAppt
-            ? '<span class="badge badge-green">取得</span>'
-            : '<span class="badge badge-orange">未取得</span>'}</td>
+          <td>${p.cancel ? '<span class="badge badge-red">あり</span>' : '<span class="badge badge-gray">なし</span>'}</td>
+          <td>${p.nextAppt ? '<span class="badge badge-green">取得</span>' : '<span class="badge badge-orange">未取得</span>'}</td>
         </tr>`;
     });
   }
 
-  function filterTherapist(name, btn) {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  function filterStore(store, btn) {
+    currentStore = store;
+    currentTherapist = 'all';
+    document.querySelectorAll('#storeTabs .tab-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    const filtered = name === 'all' ? patients : patients.filter(p => p.therapist === name);
-    renderAdCosts(filtered);
+
+    const storePts = store === 'all' ? patients : patients.filter(p => p.store === store);
+    renderStoreKpi(store);
+    renderAdCosts(storePts, store);
+    renderTherapistTabs(storePts);
+    renderTable(storePts);
+  }
+
+  function filterTherapist(name, btn) {
+    currentTherapist = name;
+    document.querySelectorAll('#therapistTabs .tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const storePts = currentStore === 'all' ? patients : patients.filter(p => p.store === currentStore);
+    const filtered = name === 'all' ? storePts : storePts.filter(p => p.therapist === name);
     renderTable(filtered);
   }
 
-  renderAdCosts(patients);
-  renderTable(patients);
+  // 初期描画
+  filterStore('all', document.querySelector('#storeTabs .tab-btn'));
 </script>
 </body>
 </html>
